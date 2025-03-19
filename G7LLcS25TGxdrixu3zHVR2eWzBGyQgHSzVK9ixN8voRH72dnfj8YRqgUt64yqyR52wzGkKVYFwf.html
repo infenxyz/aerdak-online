@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: #000000; /* Pitch black background */
-            color: #00FF00; /* Green text color */
+            color: #ff0000; /* Green text color */
             font-family: 'Courier New', Courier, monospace; /* Monospaced font */
             display: flex;
             flex-direction: column;
@@ -18,37 +18,43 @@
         }
         h1 {
             font-size: 3em; /* Adjust the size as needed */
-            margin-bottom: 20px; /* Space below the title */
+            margin-bottom: 3px; /* Space below the title */
         }
-        input {
-            background-color: transparent;
-            border: 2px solid darkgray; /* Green outline */
-            color: #00FF00; /* Green text */
-            padding: 10px 20px;
+        h2 {
+            color:#c96969
+        }      
+        .buttonalt2 {
+            background-color: #3e0000;
+            border: 2px solid red; /* Red outline */
+            color: #f00; /* Red text */
+            padding: 10px 2px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1em;
-            text-align: center;
-            outline: none; /* Remove default input outline */
-            margin-bottom: 10px; /* Space between inputs */
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from links */
+            transition: background-color 0.3s, color 0.3s;
+            width: 240px; /* Fixed width for all buttons */
+            text-align: center; /* Center text inside buttons */
+            box-sizing: border-box; /* Include padding and border in the width */
         }
-        input::placeholder {
-            color: #00FF00; /* Green placeholder text */
-            opacity: 0.7; /* Slightly transparent */
+        .buttonalt2:hover {
+            background-color: darkred; /* Green background on hover */
+            color: #fff; /* Black text on hover */
         }
-        #accessLink {
-            display: none; /* Hidden by default */
-            color: cyan; /* Blue link color */
-            font-size: 1.5em;
-            margin-top: 20px;
-            text-decoration: underline;
-        }
-        #accessLink:hover {
-            color: #fff; /* White on hover */
+        .button-container2 {
+            display: flex;
+            gap: 50px; /* Space between buttons */
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
-    <h1>Security Monitor</h1>
+    <h1>Request Failed</h1>
+    <h2>Weak Astralink Connection, Please Move Closer To Aerdak</h2>
     <table></table>
+        </div>
+    <div class="button-container2">
+        <a href="https://aerdak.online/" class="buttonalt2">GO BACK</a>
+    </div>
 </body>
 </html>
