@@ -3,70 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AERDAK | Logged in as AER-5</title>
+    <title>AERDAK ARCHIVES</title>
     <style>
         body {
-            background-color: #000000; /* Pitch black background */
-            color: #00FF00; /* Green text color */
-            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            background-color: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
         h1 {
-            font-size: 4em; /* Adjust the size as needed */
-            margin-bottom: 5px; /* Space below the title */
+            font-size: 3em;
+            margin-bottom: 20px;
         }
-        .button-container {
-            display: flex;
-            gap: 10px; /* Space between buttons */
-
-        }
-        .button-container2 {
-            display: flex;
-            gap: 100px; /* Space between buttons */
-            margin-top: 50px;
-        }
-        .button {
-            background-color: black;
-            border: 2px solid darkgreen; /* Green outline */
-            color: #00FF00; /* Green text */
-            padding: 10px 2px;
+        select {
+            background-color: #000000; /* Black background */
+            border: 2px solid darkgray;
+            color: #00FF00;
+            padding: 10px 20px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1em;
-            cursor: pointer;
-            text-decoration: none; /* Remove underline from links */
-            transition: background-color 0.3s, color 0.3s;
-            width: 120px; /* Fixed width for all buttons */
-            text-align: center; /* Center text inside buttons */
-            box-sizing: border-box; /* Include padding and border in the width */
+            text-align: center;
+            outline: none;
+            margin-bottom: 10px;
+            width: 300px; /* Adjusted width for better visibility */
         }
-        .button:hover {
-            background-color: #00FF00; /* Green background on hover */
-            color: #000000; /* Black text on hover */
+        /* Style for original articles */
+        .original-article {
+            color: pink; /* Purple color */
         }
-        .buttonalt {
-            background-color: black;
-            border: 2px solid #3e0000; /* Red outline */
-            color: #4a2424; /* Red text */
-            padding: 10px 2px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1em;
-            cursor: pointer;
-            text-decoration: none; /* Remove underline from links */
-            transition: background-color 0.3s, color 0.3s;
-            width: 120px; /* Fixed width for all buttons */
-            text-align: center; /* Center text inside buttons */
-            box-sizing: border-box; /* Include padding and border in the width */
+        #articleContent {
+            display: none;
+            border: 2px solid darkgray;
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            white-space: pre-wrap;
         }
-        .buttonalt:hover {
-            background-color: darkred; /* Green background on hover */
-            color: #fff; /* Black text on hover */
-        }
-        .buttonalt2 {
+              .buttonalt2 {
             background-color: #3e0000;
             border: 2px solid red; /* Red outline */
             color: #f00; /* Red text */
@@ -84,20 +64,80 @@
             background-color: darkred; /* Green background on hover */
             color: #fff; /* Black text on hover */
         }
+        .button-container2 {
+            display: flex;
+            gap: 50px; /* Space between buttons */
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome, AER-5</h1>
-    <h2>What would you like to do?</h2>
-    <div class="button-container">
-        <a href="https://aerdak.online/DjeEWWjuXkiKuczf4zkkWYAF9yLANPDaLL85so2AFciopKt2p7sSb7ZSdTe6SL9jJDuSppGMRfF" class="button">Archives</a>
-        <a href="https://aerdak.online/G7LLcS25TGxdrixu3zHVR2eWzBGyQgHSzVK9ixN8voRH72dnfj8YRqgUt64yqyR52wzGkKVYFwf" class="button">Security</a>
-        <a href="https://aerdak.online/ytYb4Kt43PahWAgX77arvZH9dYRE3kbr6QYJaJEAXo9qUTMJ5j4Yy9qYphhoYwzak7rZVhNQxXW" class="button">Communicate</a>
-        <a href="https://aerdak.online/WVdWeVpHRnJiMjVzYVc1bFlBRVJEQUtXVnlaR0ZyYjI1c2FXNWxZV1Z5WkdGcmIyNXNhVzVsWVd"class="buttonalt">No Access</a>
-        <a href="https://aerdak.online/WVdWeVpHRnJiMjVzYVc1bFlBRVJEQUtXVnlaR0ZyYjI1c2FXNWxZV1Z5WkdGcmIyNXNhVzVsWVd"class="buttonalt">No Access</a>
+    <h1>Aerdak Interface</h1>
+    <select id="articleDropdown">
+        <option value="None">-- Select Log --</option>
+    </select>
+    <div id="articleContent"></div>
+
+    <script>
+        // Original 3 articles
+        const originalArticles = {
+            "Aleph's Procedures": "Aleph's Containment\n\nAleph is currently being contained in Celestia. We have him trapped and are ready to exploit him for our plans.",
+            "Depthaar's Intentions": "Depthaar's Intentions\n\nDepthaar's followers have proven to be quite the hinderance in our plans. We should seek to eliminate them at all costs.",
+            "AER-1's Logs": "AER-1's Logs\n\nAER-1 continues to lead Aerdak with bravery and integrity. May mortals rise once again."
+        };
+
+        // Generate additional 47 articles
+        const generateTitle = () => {
+            const prefixes = ["Quantum", "Cosmic", "Temporal", "Existential", "Void", "Eternal", 
+                            "Paradoxical", "Singular", "Multiversal", "Omnidirectional", 
+                            "Hyperdimensional", "Entropic", "Celestial", "Infinite", "Anomalous"];
+            const suffixes = ["Mechanics", "Paradox", "Enigma", "Manifestation", "Oscillation", 
+                            "Conundrum", "Emanation", "Resonance", "Fluctuation", "Incursion",
+                            "Collapse", "Superposition", "Transmutation", "Aberration", "Catalyst"];
+            return `${prefixes[Math.floor(Math.random()*prefixes.length)]} ${suffixes[Math.floor(Math.random()*suffixes.length)]}`;
+        };
+
+        // Combine original and generated articles
+        const articles = {...originalArticles};
+        for(let i = 0; i < 47; i++) {
+            const title = generateTitle();
+            articles[title] = "There's nothing here you can understand. It's all just science-y rambling and math.";
+        }
+
+        // Populate dropdown with random positioning for original articles
+        const dropdown = document.getElementById('articleDropdown');
+        const allTitles = Object.keys(articles);
+        
+        // Shuffle the array to randomize positions
+        const shuffledTitles = allTitles.sort(() => Math.random() - 0.5);
+
+        shuffledTitles.forEach(title => {
+            const option = document.createElement('option');
+            option.value = title;
+            option.textContent = title;
+            // Add class for original articles
+            if (originalArticles.hasOwnProperty(title)) {
+                option.classList.add('original-article');
+            }
+            dropdown.appendChild(option);
+        });
+
+        const contentDiv = document.getElementById('articleContent');
+
+        dropdown.addEventListener('change', function() {
+            const selected = this.value;
+            if (selected === "None") {
+                contentDiv.style.display = 'none';
+            } else {
+                contentDiv.textContent = articles[selected];
+                contentDiv.style.display = 'block';
+            }
+        });
+    </script>
+
     </div>
     <div class="button-container2">
-        <a href="https://aerdak.online/" class="buttonalt2">DISCONNECT</a>
+        <a href="https://aerdak.online/" class="buttonalt2">GO BACK</a>
     </div>
 </body>
 </html>
