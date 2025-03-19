@@ -46,10 +46,33 @@
             text-align: left;
             white-space: pre-wrap;
         }
+              .buttonalt2 {
+            background-color: #3e0000;
+            border: 2px solid red; /* Red outline */
+            color: #f00; /* Red text */
+            padding: 10px 2px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none; /* Remove underline from links */
+            transition: background-color 0.3s, color 0.3s;
+            width: 240px; /* Fixed width for all buttons */
+            text-align: center; /* Center text inside buttons */
+            box-sizing: border-box; /* Include padding and border in the width */
+        }
+        .buttonalt2:hover {
+            background-color: darkred; /* Green background on hover */
+            color: #fff; /* Black text on hover */
+        }
+        .button-container2 {
+            display: flex;
+            gap: 50px; /* Space between buttons */
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
-    <h1>Aerdak Interface</h1>
+    <h1>Archives for AER-5</h1>
     <select id="articleDropdown">
         <option value="None">-- Select Log --</option>
     </select>
@@ -111,5 +134,10 @@
             }
         });
     </script>
+
+    </div>
+    <div class="button-container2">
+        <a href="https://aerdak.online/" class="buttonalt2">GO BACK</a>
+    </div>
 </body>
 </html>
