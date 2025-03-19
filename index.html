@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Denied</title>
+    <style>
+        body {
+            background-color: #000000; /* Pitch black background */
+            color: #00FF00; /* Green text color */
+            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3em; /* Adjust the size as needed */
+            margin-bottom: 20px; /* Space below the title */
+        }
+        input {
+            background-color: transparent;
+            border: 2px solid darkgray; /* Green outline */
+            color: #00FF00; /* Green text */
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            text-align: center;
+            outline: none; /* Remove default input outline */
+            margin-bottom: 10px; /* Space between inputs */
+        }
+        input::placeholder {
+            color: #00FF00; /* Green placeholder text */
+            opacity: 0.7; /* Slightly transparent */
+        }
+        #accessLink {
+            display: none; /* Hidden by default */
+            color: cyan; /* Blue link color */
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-decoration: underline; italic;
+        }
+        #accessLink:hover {
+            color: #fff; /* White on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Aerdak Interface</h1>
+    <input type="text" id="usernameInput" placeholder="AER-ID" />
+    <input type="password" id="passwordInput" placeholder="Enter Code" />
+    <a id="accessLink" href="https://aer5.aerdak.online/WVdWeVpHRnJiMjVzYVc1bFlBRVJEQUtXVnlaR0ZyYjI1c2FXNWxZV1Z5WkdGcmIyNXNhVzVsWVd">Access Granted</a>
+
+    <script>
+        // Get the username, password input elements, and the access link
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const accessLink = document.getElementById('accessLink');
+
+        // Function to check credentials
+        function checkCredentials() {
+            const username = usernameInput.value.trim(); // Trim whitespace
+            const password = passwordInput.value.trim(); // Trim whitespace
+
+            // Check if both username and password are correct
+            if (username === 'AER-5' && password === '42depthaar') {
+                // Show the access link
+                accessLink.style.display = 'block';
+            } else {
+                // Hide the access link if credentials are incorrect
+                accessLink.style.display = 'none';
+            }
+        }
+
+        // Add event listeners to both inputs
+        usernameInput.addEventListener('input', checkCredentials);
+        passwordInput.addEventListener('input', checkCredentials);
+    </script>
+</body>
+</html>
