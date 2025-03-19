@@ -6,78 +6,91 @@
     <title>AERDAK ARCHIVES</title>
     <style>
         body {
-            background-color: #000000; /* Pitch black background */
-            color: #00FF00; /* Green text color */
-            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            background-color: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
         h1 {
-            font-size: 3em; /* Adjust the size as needed */
-            margin-bottom: 20px; /* Space below the title */
+            font-size: 3em;
+            margin-bottom: 20px;
         }
-        input {
+        input, select {
             background-color: transparent;
-            border: 2px solid darkgray; /* Green outline */
-            color: #00FF00; /* Green text */
+            border: 2px solid darkgray;
+            color: #00FF00;
             padding: 10px 20px;
             font-family: 'Courier New', Courier, monospace;
             font-size: 1em;
             text-align: center;
-            outline: none; /* Remove default input outline */
-            margin-bottom: 10px; /* Space between inputs */
+            outline: none;
+            margin-bottom: 10px;
         }
         input::placeholder {
-            color: #00FF00; /* Green placeholder text */
-            opacity: 0.7; /* Slightly transparent */
+            color: #00FF00;
+            opacity: 0.7;
         }
-        select {
-            background-color: transparent;
-            border: 2px solid darkgray; /* Green outline */
-            color: #00FF00; /* Green text */
-            padding: 10px 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1em;
-            text-align: center;
-            outline: none; /* Remove default input outline */
-            margin-bottom: 10px; /* Space between elements */
-        }
-        #accessLink {
-            display: none; /* Hidden by default */
-            color: cyan; /* Blue link color */
-            font-size: 1.5em;
+        #articleContent {
+            display: none;
+            border: 2px solid darkgray;
+            padding: 20px;
             margin-top: 20px;
-            text-decoration: underline; italic;
-        }
-        #accessLink:hover {
-            color: #fff; /* White on hover */
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            white-space: pre-wrap;
         }
     </style>
 </head>
 <body>
     <h1>Aerdak Interface</h1>
     <select id="articleDropdown">
-        <option value="Article 1">Article 1</option>
-        <option value="Article 2">Article 2</option>
-        <option value="Article 3">Article 3</option>
+        <option value="None">-- Select Log --</option>
+        <option value="Article 1">Aleph's Procedures</option>
+        <option value="Article 2">Depthaar's Intentions</option>
+        <option value="Article 3">AER-1's Logs</option>
     </select>
-    <input type="text" id="usernameInput" placeholder="Search..." oninput="filterArticles()" />
+    <input type="text" id="usernameInput" placeholder="Search..." oninput="filterArticles()">
+    <div id="articleContent"></div>
+
     <script>
+        const articles = {
+            "Article 1": "\bAleph's Containment\b\n\nAleph is currently being contained in Celestia. We have him trapped and are ready to exploit him for our plans.",
+            "Article 2": "abcdefghijklmnopqrstuvwxyz\n\nArticle 2 content: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "Article 3": "abcdefghijklmnopqrstuvwxyz\n\nArticle 3 content: Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+        };
+
+        const dropdown = document.getElementById('articleDropdown');
+        const contentDiv = document.getElementById('articleContent');
+
+        dropdown.addEventListener('change', function() {
+            const selected = this.value;
+            if (selected === "None") {
+                contentDiv.style.display = 'none';
+            } else {
+                contentDiv.textContent = articles[selected];
+                contentDiv.style.display = 'block';
+            }
+        });
+
         function filterArticles() {
             const input = document.getElementById('usernameInput').value.toLowerCase();
-            const dropdown = document.getElementById('articleDropdown');
             const options = dropdown.getElementsByTagName('option');
             
             for (let i = 0; i < options.length; i++) {
-                const option = options[i].value.toLowerCase();
-                if (option.includes(input)) {
-                    options[i].style.display = '';
+                const option = options[i];
+                const text = option.value.toLowerCase();
+                if (text === "none") continue; // Keep the "None" option always visible
+                
+                if (text.includes(input)) {
+                    option.style.display = '';
                 } else {
-                    options[i].style.display = 'none';
+                    option.style.display = 'none';
                 }
             }
         }
