@@ -20,8 +20,8 @@
             font-size: 3em;
             margin-bottom: 20px;
         }
-        input, select {
-            background-color: transparent;
+        select {
+            background-color: #000000; /* Black background */
             border: 2px solid darkgray;
             color: #00FF00;
             padding: 10px 20px;
@@ -30,10 +30,11 @@
             text-align: center;
             outline: none;
             margin-bottom: 10px;
+            width: 300px; /* Adjusted width for better visibility */
         }
-        input::placeholder {
-            color: #00FF00;
-            opacity: 0.7;
+        /* Style for original articles */
+        .original-article {
+            color: lightpurple; /* Purple color */
         }
         #articleContent {
             display: none;
@@ -51,21 +52,53 @@
     <h1>Aerdak Interface</h1>
     <select id="articleDropdown">
         <option value="None">-- Select Log --</option>
-        <option value="Article 1">Aleph's Procedures</option>
-        <option value="Article 2">Depthaar's Intentions</option>
-        <option value="Article 3">AER-1's Logs</option>
     </select>
-    <input type="text" id="usernameInput" placeholder="Search..." oninput="filterArticles()">
     <div id="articleContent"></div>
 
     <script>
-        const articles = {
-            "Article 1": "\bAleph's Containment\b\n\nAleph is currently being contained in Celestia. We have him trapped and are ready to exploit him for our plans.",
-            "Article 2": "abcdefghijklmnopqrstuvwxyz\n\nArticle 2 content: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            "Article 3": "abcdefghijklmnopqrstuvwxyz\n\nArticle 3 content: Ut enim ad minim veniam, quis nostrud exercitation ullamco."
+        // Original 3 articles
+        const originalArticles = {
+            "Aleph's Procedures": "Aleph's Containment\n\nAleph is currently being contained in Celestia. We have him trapped and are ready to exploit him for our plans.",
+            "Depthaar's Intentions": "Depthaar's Intentions\n\nDepthaar's followers have proven to be quite the hinderance in our plans. We should seek to eliminate them at all costs.",
+            "AER-1's Logs": "AER-1's Logs\n\nAER-1 continues to lead Aerdak with bravery and integrity. May mortals rise once again."
         };
 
+        // Generate additional 47 articles
+        const generateTitle = () => {
+            const prefixes = ["Quantum", "Cosmic", "Temporal", "Existential", "Void", "Eternal", 
+                            "Paradoxical", "Singular", "Multiversal", "Omnidirectional", 
+                            "Hyperdimensional", "Entropic", "Celestial", "Infinite", "Anomalous"];
+            const suffixes = ["Mechanics", "Paradox", "Enigma", "Manifestation", "Oscillation", 
+                            "Conundrum", "Emanation", "Resonance", "Fluctuation", "Incursion",
+                            "Collapse", "Superposition", "Transmutation", "Aberration", "Catalyst"];
+            return `${prefixes[Math.floor(Math.random()*prefixes.length)]} ${suffixes[Math.floor(Math.random()*suffixes.length)]}`;
+        };
+
+        // Combine original and generated articles
+        const articles = {...originalArticles};
+        for(let i = 0; i < 47; i++) {
+            const title = generateTitle();
+            articles[title] = "There's nothing here you can understand. It's all just science-y rambling and math.";
+        }
+
+        // Populate dropdown with random positioning for original articles
         const dropdown = document.getElementById('articleDropdown');
+        const allTitles = Object.keys(articles);
+        
+        // Shuffle the array to randomize positions
+        const shuffledTitles = allTitles.sort(() => Math.random() - 0.5);
+
+        shuffledTitles.forEach(title => {
+            const option = document.createElement('option');
+            option.value = title;
+            option.textContent = title;
+            // Add class for original articles
+            if (originalArticles.hasOwnProperty(title)) {
+                option.classList.add('original-article');
+            }
+            dropdown.appendChild(option);
+        });
+
         const contentDiv = document.getElementById('articleContent');
 
         dropdown.addEventListener('change', function() {
@@ -77,23 +110,6 @@
                 contentDiv.style.display = 'block';
             }
         });
-
-        function filterArticles() {
-            const input = document.getElementById('usernameInput').value.toLowerCase();
-            const options = dropdown.getElementsByTagName('option');
-            
-            for (let i = 0; i < options.length; i++) {
-                const option = options[i];
-                const text = option.value.toLowerCase();
-                if (text === "none") continue; // Keep the "None" option always visible
-                
-                if (text.includes(input)) {
-                    option.style.display = '';
-                } else {
-                    option.style.display = 'none';
-                }
-            }
-        }
     </script>
 </body>
 </html>
