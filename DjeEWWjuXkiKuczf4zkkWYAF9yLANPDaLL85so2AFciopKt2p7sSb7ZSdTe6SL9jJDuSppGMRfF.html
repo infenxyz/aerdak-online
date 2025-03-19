@@ -1,1 +1,54 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERDAK ARCHIVES</title>
+    <style>
+        body {
+            background-color: #000000; /* Pitch black background */
+            color: #00FF00; /* Green text color */
+            font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3em; /* Adjust the size as needed */
+            margin-bottom: 20px; /* Space below the title */
+        }
+        input {
+            background-color: transparent;
+            border: 2px solid darkgray; /* Green outline */
+            color: #00FF00; /* Green text */
+            padding: 10px 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
+            text-align: center;
+            outline: none; /* Remove default input outline */
+            margin-bottom: 10px; /* Space between inputs */
+        }
+        input::placeholder {
+            color: #00FF00; /* Green placeholder text */
+            opacity: 0.7; /* Slightly transparent */
+        }
+        #accessLink {
+            display: none; /* Hidden by default */
+            color: cyan; /* Blue link color */
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-decoration: underline; italic;
+        }
+        #accessLink:hover {
+            color: #fff; /* White on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Aerdak Interface</h1>
+    <input type="text" id="usernameInput" placeholder="Search..." />
+</body>
+</html>
